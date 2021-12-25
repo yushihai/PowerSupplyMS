@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/reset.css}" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/login.css}" />
+
+</head>
+<body>
+<div class="page">
+    <div class="loginwarrp">
+        <div class="logo">登陆</div>
+        <div class="login_form">
+            <form id="Login" name="Login" method="post" onsubmit="return check()" th:action="@{/loginConfirm}"
+                  onreset="$('#count-msg').html('');$('#password-msg').html('');">
+                <li class="login-item">
+                    <span>用户名：</span>
+                    <input type="text" id="name" name="name" class="login_input" >
+                    <span id="count-msg" class="error"></span>
+                </li>
+                <li class="login-item">
+                    <span>密　码：</span>
+                    <input type="password" id="password" name="password" class="login_input" >
+                    <span id="password-msg" class="error"></span>
+                </li>
+                <!--<li class="login-item verify">
+                    <span>验证码：</span>
+                    <input type="text" name="CheckCode" class="login_input verify_input">
+                </li>
+                <img src="images/verify.png" border="0" class="verifyimg" />
+                <div class="clearfix"></div> -->
+                <li class="login-sub">
+                    <input type="submit" name="Submit" value="登录" />
+                    <input type="reset" name="Reset" value="重置"/>
+                </li>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{js/jquery.min.js}"></script>
+
+<script type="text/javascript">
+    window.onload = function() {
+        var config = {
+            vx : 4,
+            vy : 4,
+            height : 2,
+            width : 2,
+            count : 100,
+            color : "121, 162, 185",
+            stroke : "100, 200, 180",
+            dist : 6000,
+            e_dist : 20000,
+            max_conn : 10
+        }
+        CanvasParticle(config);
+    }
+    function check() {
+        return checkName()&&checkPassword();
+    }
+
+    function checkName(){
+        var name = $('#name').val();
+        if(name == null || name == ""){
+            //提示错误
+            $('#count-msg').html("用户名不能为空");
+            return false;
+        }
+/*        var reg = /^\w{3,10}$/;
+        if(!reg.test(name)){
+            $('#count-msg').html("输入3-10个字母或数字或下划线");
+            return false;
+        }*/
+        $('#count-msg').empty();
+        return true;
+    }
+
+    function checkPassword(){
+        var password = $('#password').val();
+        if(password == null || password == ""){
+            //提示错误
+            $('#password-msg').html("密码不能为空");
+            return false;
+        }
+/*        var reg = /^\w{3,10}$/;
+        if(!reg.test(password)){
+            $('#password-msg').html("输入3-10个字母或数字或下划线");
+            return false;
+        }*/
+        $('#password-msg').empty();
+        return true;
+    }
+</script>
+<script type="text/javascript" src="js/canvas-particle.js"></script>
+</body>
+</html>
